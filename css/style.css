@@ -164,7 +164,7 @@ nav {
   content: attr(data-tooltip);
   position: absolute;
   left: 0;
-  top: -12px; /* position above text */
+  top: -20px; /* position above text */
   background: #ffffff;
   padding: 2px 6px;
   border: 1px solid #ddd;
