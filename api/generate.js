@@ -12,6 +12,33 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "No image provided" });
     }
 
+    // ⭐⭐⭐ ADDED: keyword cleaning + soft enforcement ⭐⭐⭐
+    let keywordNote = "";
+if (optionalKeyword.trim()) {
+  const parts = optionalKeyword
+    .split(",")
+    .map(k => k.trim())
+    .filter(k => k.length > 0);
+
+  if (parts.length > 2) {
+    return res.status(400).json({ error: "Only 2 keywords allowed." });
+  }
+
+  if (parts.length > 0) {
+    keywordNote = `
+When writing "alt" and "caption":
+• Gently incorporate ALL of these keywords in both alt and caption output: ${parts.join(", ")}  
+• Use synonyms or semantic variations IF needed to make the text natural.  
+• The keywords should feel smoothly integrated, not forced or artificial.  
+• DO NOT include these keywords in the "filename".  
+• The "filename" should only reflect what is visually present in the image.
+
+Keep tone natural and descriptive. Avoid keyword stuffing.
+`;
+  }
+}
+
+
     const systemPrompt = `
 You are an Image SEO Expert. Given the image attached, return EXACTLY ONE JSON object (no extra commentary)
 with these keys: "alt", "caption", "filename".
@@ -24,6 +51,9 @@ Rules:
 Return only JSON. Example:
 {"alt":"The Taj Mahal, a white marble mausoleum with minarets, reflects in a long pool under a blue sky with scattered clouds in Agra, India.","caption":"The Taj Mahal on a sunny day","filename":"taj-mahal"}`;
 
+    // ⭐⭐⭐ ADDED: final prompt = base prompt + keyword logic ⭐⭐⭐
+    const finalPrompt = systemPrompt + keywordNote;
+
     // Build OpenAI Responses API payload
     const payload = {
       model: "gpt-4o-mini",
@@ -31,9 +61,9 @@ Return only JSON. Example:
         {
           role: "user",
           content: [
-            { type: "input_text", text: systemPrompt },
-            { type: "input_image", image_url: imageDataUrl },
-            { type: "input_text", text: optionalKeyword ? `keyword:${optionalKeyword}` : "" }
+            // ⭐⭐⭐ CHANGED: send finalPrompt instead of systemPrompt ⭐⭐⭐
+            { type: "input_text", text: finalPrompt },
+            { type: "input_image", image_url: imageDataUrl }
           ]
         }
       ],

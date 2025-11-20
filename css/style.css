@@ -114,6 +114,70 @@ nav {
 }
 
 
+
+/* Mini-nav for tool navigation */
+/* Top mini navigation */
+/* Top mini navigation */
+.mini-nav {
+  font-family: "Inter Tight", sans-serif;
+  font-size: 10px;
+  margin-bottom: 12px; /* space before upload box */
+  padding-left: 4px;   /* the 4px you wanted */
+  
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  
+  width: 100%;   /* ensures it aligns with the upload-box width */
+  justify-content: flex-start;  /* left align */
+  text-align: left;
+}
+
+
+/* Normal link style */
+.nav-link {
+  cursor: default; /* since not clickable yet */
+  transition: 0.15s ease;
+}
+
+/* Single Image color */
+.nav-link.single {
+  color: #f03dd4;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+/* Bulk Upload default color */
+.nav-link.bulk {
+  color: #3b66ff;
+  position: relative;
+}
+
+/* Separator style */
+.nav-separator {
+  color: #aaa;
+  opacity: 0.6;
+}
+
+/* Tooltip on hover */
+.nav-link.bulk:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 0;
+  top: -22
+px; /* position above text */
+  background: #ffffff;
+  padding: 2px 6px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 10px;
+  white-space: nowrap;
+  color: #555;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+
+
 /* ----------------------------------------- */
 /* HERO SECTION BASE */
 /* ----------------------------------------- */
@@ -150,7 +214,7 @@ nav {
     color: var(--black);
     line-height: 1.2;
     text-align: center;
-    margin-bottom: 67px;
+    margin-bottom: 57px;
 
     filter:
     drop-shadow(0 0 10px rgba(255, 120, 180, 0.45))
@@ -196,7 +260,6 @@ nav {
 
 .upload-box {
     width: 374px;
-    margin-bottom: 19px;
 }
 
 .upload-area {
@@ -259,6 +322,63 @@ nav {
 .upload-area:hover .upload-image-icon {
     content: url("../images/image_upload-active.png");
 }
+
+
+/* ============================
+   Keyword Input Styling
+   ============================ */
+
+
+/* Keyword box spacing + styling */
+.keyword-box {
+    margin-top: 12px;    /* gap from upload box bottom */
+    margin-bottom: 8px; /* gap before button */
+}
+
+/* Minimal input line style */
+.keyword-input {
+    width: 374px;
+    border: none;
+    border-bottom: 1px solid #b1b2b5d5; /* default underline */
+    padding: 0 2px;
+    font-size: 12px;
+    line-height: 1.7;
+    height: 21px;
+    outline: none;
+    background: transparent;
+    color: #454444;   /* typed text color */
+    font-family: "inter tight", sans-serif;
+    font-style: italic;
+}
+
+/* Placeholder default color */
+.keyword-input::placeholder {
+    color: #b1b2b5d5;
+    opacity: 1;
+}
+
+/* On focus */
+.keyword-input:focus {
+    border-bottom: 1px solid #454444; /* focused underline */
+}
+
+/* Hide placeholder on focus */
+.keyword-input:focus::placeholder {
+    color: transparent; /* makes it disappear */
+}
+
+
+
+/* Error on >2 keyword*/
+
+.keyword-error {
+    font-size: 11px;
+    color: #d9534f; /* soft red */
+    margin-top: 3px;
+    margin-bottom: 0;
+    height: 14px;  /* reserves space so UI doesn't jump */
+}
+
 
 /* ============================
    Image Preview Styling
