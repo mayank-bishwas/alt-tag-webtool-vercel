@@ -1,0 +1,294 @@
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AI Alt Tag Generator</title>
+        <meta name="description" content="An experiment on AI Alt Tag generator">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css?v=2">
+        <script src="js/bulk.js" defer></script>
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <a href="index.html" class="logo-link" aria-label="Image SEO Checker Home">
+                    <img src="images/logo.png" alt="Image SEO Checker">
+                </a>
+            </nav>
+        </header>
+        <!-- End of desktop navigation menu -->
+
+        <main>
+
+            <!-- Hero section starts -->
+            <section class="hero-section">
+                <div class="wrapper">
+
+                    <h1>Optimize Image SEO with <span class="colored">AI</span> in bulk</h1>
+
+                    <!-- Mini-nav -->
+                    <div class="bulk-mini-nav">
+                        <a href="index.html" class="bulk-nav-link bulk-single">Single Image ⤴</a>
+                        <span class="bulk-nav-separator">|</span>
+                        <span class="bulk-nav-link bulk-active" data-tooltip="You're already here">Bulk Upload</span>
+                    </div>
+
+
+                    <!-- Bulk Upload Box -->
+                    <div class="bulk-upload-wrapper">
+
+                        <!-- Upload area label -->
+                        <label for="bulkImageInput" class="bulk-upload-area" id="bulkUploadArea">
+
+                            <div class="bulk-upload-inner" id="bulkUploadInner">
+
+                                <!-- DEFAULT + HOVER UI -->
+                                <div id="bulkDefaultUI" class="bulk-state-box">
+      <div class="bulk-state-frame">
+        <img src="images/upload-bulk.svg" class="bulk-upload-icon" alt="upload icon">
+        <p class="bulk-upload-text">Upload up to 15 images, 12 MB total</p>
+      </div>
+      <span class="bulk-upload-note">PNG, JPG/JPEG, GIF, WebP</span>
+    </div>
+
+
+                                <!-- UPLOADING -->
+                                <div id="bulkUploadingBox" class="bulk-state-box" style="display:none;">
+      <div class="bulk-state-frame">
+        <img src="images/uploading-image.svg" class="uploading-icon" alt="uploading">
+        <p class="uploading-text">Uploading the image <span id="uploadingCount">0/0</span></p>
+      </div>
+    </div>
+
+
+                                <!-- UPLOADED DONE -->
+                                <div id="bulkUploadingDoneBox" class="bulk-state-box" style="display:none;">
+      <div class="bulk-state-frame">
+        <img src="images/uploaded-image.svg" class="uploading-done-icon" alt="uploaded">
+        <p class="uploading-text">Done uploading all images <span id="uploadingDoneCount">0/0</span></p>
+      </div>
+    </div>
+
+
+                                <!-- PROCESSING -->
+                                <div id="bulkProcessingBox" class="bulk-state-box" style="display:none;">
+      <div class="bulk-state-frame">
+        <img src="images/bulk_processing-1.svg" class="bulk-progress-icon" alt="processing">
+        <p class="bulk-progress-text" id="bulkProgressText"></p>
+      </div>
+      <p class="bulk-progress-remark" id="bulkProgressRemark"></p>
+    </div>
+
+
+                                <!-- DONE -->
+                                <div id="bulkDoneBox" class="bulk-state-box" style="display:none;">
+                                    <img src="images/bulk-done.svg" class="bulk-done-icon" alt="done">
+                                    <p class="bulk-done-text">Done!</p>
+                                    <p class="bulk-backup-text">
+                                        Alt texts auto-downloaded. Still,
+                                        <a id="bulkDownloadLink" class="bulk-download-link">here’s a backup ↓</a>
+                                    </p>
+                                </div>
+
+                                <!-- ERROR -->
+                                <!-- ERROR -->
+<div id="bulkErrorBox" class="bulk-state-box" style="display:none;">
+  <div class="bulk-state-frame">
+    <img src="images/bulk_error.svg" class="bulk-error-icon" alt="error">
+    <p class="bulk-error-heading">Something is Wrong!</p>
+  </div>
+  <ul class="bulk-error-list" id="bulkErrorList"></ul>
+</div>
+
+
+                            </div>
+
+
+                            <input id="bulkImageInput" type="file" accept="image/*" multiple hidden>
+
+
+                        </label>
+
+    <!-- ==============
+      BELOW IS THE HIDDEN STATES inside the Upload Box
+        ============= -->
+
+                        <!-- Uploading State (hidden initially) -->
+                        <div id="bulkUploadingBox" class="bulk-uploading-box" style="display:none;">
+                            <div class="uploading-icon"></div>
+                            <p class="uploading-text">
+                                Uploading the image <span id="uploadingCount">0/0</span>
+                            </p>
+                        </div>
+
+                        <!-- Uploading Done State (hidden initially) -->
+                        <div id="bulkUploadingDoneBox" class="bulk-uploading-done-box" style="display:none;">
+                            <div class="uploading-done-icon"></div>
+                            <p class="uploading-text">
+                                Done uploading all images <span id="uploadingDoneCount">0/0</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Error box (hidden by default) -->
+                    <div class="bulk-error-box" id="bulkErrorBox" style="display: none;">
+                        <img src="images/bulk_error.svg" class="bulk-error-icon" alt="">
+                        <p class="bulk-error-heading">Something is Wrong!</p>
+                        <ul class="bulk-error-list" id="bulkErrorList"></ul>
+                    </div>
+
+                    <!-- Processing box (hidden by default) -->
+                    <div class="bulk-progress-box" id="bulkProgressBox" style="display: none;">
+                        <img src="images/bulk_processing-1.svg" class="bulk-progress-icon" alt="">
+                        <div class="bulk-progress-bar-bg">
+                            <div class="bulk-progress-bar-fill" id="bulkProgressFill"></div>
+                        </div>
+                        <p class="bulk-progress-text" id="bulkProgressText">
+                            Putting AI in Alt Tag of the image 0/0
+                        </p>
+                        <p class="bulk-progress-remark" id="bulkProgressRemark"></p>
+                    </div>
+
+                    <!-- Done box (hidden by default) -->
+                    <div class="bulk-done-box" id="bulkDoneBox" style="display: none;">
+                        <img src="images/bulk-done.svg" class="bulk-done-icon" alt="">
+                        <p class="bulk-done-text">Done!</p>
+                        <p class="bulk-backup-text">
+                            Alt texts auto-downloaded. Still,
+                            <a id="bulkDownloadLink" class="bulk-download-link">here’s a backup ↓</a>
+                        </p>
+                    </div>
+
+      <!-- ==============
+      ABOVE IS THE HIDDEN STATES inside the Upload Box
+      ============= -->
+
+                    <!-- Description Input -->
+                    <div class="bulk-desc-box">
+                        <input type="text" id="bulkDescription" maxlength="100" placeholder="Description (Optional. &lt; 100 chars.) E.g. Steve Madden water-proof shoes for their product page. | Dashboard screenshots of RankMax SEO Tool for tutorial." class="bulk-desc-input"
+                        aria-label="Optional description for batch" />
+                        <div class="bulk-desc-error" id="bulkDescError"></div>
+                    </div>
+
+                    <!-- Button -->
+                    <button type="button" class="generate-btn" id="bulkGenerateBtn" aria-label="Generate ALT text for all images">
+                        Generate ALT Text for All
+                    </button>
+
+
+                </div>
+            </section>
+            <!-- Hero section ends -->
+
+            <!-- Tutorial Section starts  -->
+
+            <section class="tutorial-section">
+                <div class="wrapper">
+                    <h2>How to Make Your Image SEO Friendly in Bulk?</h2>
+                    <div class="tutorial-content">
+                        <div class="tutorial-left">
+                            <div class="bullet">
+                                <h3 class="pointer">1. Input</h3>
+                                <p class="description">Select multiple images to upload in bulk . You can optionally add description for the entire batch.</p>
+                            </div>
+
+                            <div class="bullet">
+                                <h3 class="pointer">2. Output</h3>
+                                <p class="description">Receive an Excel sheet - takes 1 minute or so - of AI-generated alt texts, captions, and file names.</p>
+                            </div>
+
+                            <div class="bullet">
+                                <h3 class="pointer">3. Apply</h3>
+                                <p class="description">Add the outputs corresponding to each image into your CMS image settings or HTML img tag attributes.</p>
+                            </div>
+                        </div>
+
+                        <div class="tutorial-right">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/jP2xnto9ewY?si=1CMNk9bdtQilaEo1&controls=1&modestbranding=1&rel=0" title="Real Moon Crash" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                                allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tutorial Section ends  -->
+
+
+            <!-- FAQs Section starts -->
+
+            <section class="faq-section">
+                <div class="wrapper">
+                    <h2>FAQs on Bulk SEO Optimization of Images</h2>
+
+                    <div class="all-faqs">
+                        <details class="faq">
+                            <summary class="question">What is SEO?</summary>
+                            <p class="answer">
+                                Search engine optimization is the process of improving the quality and quantity of website traffic to a website or a web page from search engines. SEO targets unpaid search traffic rather than direct traffic, referral traffic, social media traffic, or
+                                paid traffic.
+                            </p>
+                        </details>
+
+                        <details class="faq">
+                            <summary class="question">How does alt text help SEO?</summary>
+                            <p class="answer">
+                                Alt text helps search engines understand image content. It improves accessibility, relevance, and can boost image search rankings.
+                            </p>
+                        </details>
+
+                        <details class="faq">
+                            <summary class="question">How do I name image files for SEO?</summary>
+                            <p class="answer">
+                                Use descriptive, keyword-rich, lowercase file names separated by hyphens. Example: “golden-retriever-dog-running.jpg”.
+                            </p>
+                        </details>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQs Section ends -->
+        </main>
+        <!-- Main Section ends -->
+
+
+
+        <!-- Footer Section begins -->
+        <footer>
+            <div class="footer-left">
+                SEO is baked; not slapped on like icing on a cake.
+            </div>
+
+            <div class="footer-center">
+                <a href="https://linkedin.com/in/mayankbishwas" target="_blank">
+                    <img src="images/linkedin_white.svg" alt="LinkedIn" class="footer-linkedin">
+                </a>
+            </div>
+
+            <div class="footer-right">
+                <a href="about.html">About Us</a>
+                <a href="mailto:mayankbishwas@gmail.com">Contact Us</a>
+            </div>
+        </footer>
+
+        <!-- Footer Section ends -->
+
+        <!-- Mobile Warning -->
+        <div class="mobile-warning">
+            <div class="mobile-warning-box">
+                <h2>🖥️ Open on Desktop!</h2>
+                <p>Sorry, currently our web tool does not support mobile access; it works only on desktop.</p>
+                <p>But we're working on it, so do keep an eye out 🙂</p>
+                <p><em>P.S. Might work in landscape mode.</em>></p>
+            </div>
+        </div>
+    </body>
+
+    </html>

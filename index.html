@@ -30,9 +30,17 @@
                 
                     <h1>Optimize Image SEO with <span class="colored">AI</span></h1>
                 
+            <!-- Mini-nav for sub-tool navigation -->
+                     <div class="mini-nav">
+                            <span class="bulk-nav-link bulk-active" data-tooltip="You're already here">Single Image</span>
+                            <span class="nav-separator">|</span>
+                            <a href="bulk.html" class="bulk-nav-link bulk-single">Bulk Upload ⤴</a>
+                    </div>
+
                 <!-- Hero left begins -->
                  <div class="hero-content">
                 <div class="hero-left">
+
                 <!-- Upload Box -->
                 <div class="upload-box">
     <input type="file" id="imageInput" accept="image/*" hidden />
@@ -46,6 +54,18 @@
         <p><span class="upload-link">Click to upload or drag & drop</p>
         <span class="upload-note">PNG, JPG/JPEG, GIF, WebP</span>
     </label>
+</div>
+
+<!-- Keyword Input -->
+<div class="keyword-box">
+    <input 
+        type="text" 
+        id="keywordInput" 
+        placeholder="Keyword (optional, max 2, comma-separated)" 
+        class="keyword-input"
+        aria-label="Optional keywords"
+    />
+    <div id="keywordError" class="keyword-error"></div>
 </div>
 
 
@@ -217,7 +237,7 @@
                  <h2>🖥️ Open on Desktop!</h2>
                  <p>Sorry, currently our web tool does not support mobile access; it works only on desktop.</p>
                  <p>But we're working on it, so do keep an eye out 🙂</p>
-                 <p><em>P.S. Might work in landscape mode.</em></p>
+                 <p><em>P.S. Might work in landscape mode.</em>></p>
              </div>
             </div>
     </body>

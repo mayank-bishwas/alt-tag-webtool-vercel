@@ -50,27 +50,6 @@ h2 {
 }
 
 
-.affiliate-btn {
-    height: 34px; 
-    width: 170px;
-    color: var(--black);
-
-    font-family: "Inter", sans-serif;
-    font-size: 14px;
-    font-weight: normal;
-    padding: 9px 61px 9px 64px;
-    text-decoration: none;
-
-    border: 1px solid var(--black);
-    border-radius: 20px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    cursor: pointer;
-}
-
 /* Header */
 
 header {
@@ -114,6 +93,70 @@ nav {
 }
 
 
+
+/* Mini-nav for tool navigation */
+/* Top mini navigation */
+
+.mini-nav {
+  font-family: "Inter Tight", sans-serif;
+  font-size: 10px;
+  margin-bottom: 12px; /* space before upload box */
+  padding-left: 4px;   /* the 4px you wanted */
+  
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  
+  width: 100%;   /* ensures it aligns with the upload-box width */
+  justify-content: flex-start;  /* left align */
+  text-align: left;
+}
+
+
+/* Normal link style */
+.nav-link {
+  cursor: default; /* since not clickable yet */
+  transition: 0.15s ease;
+}
+
+/* Single Image color */
+.nav-link.single {
+  color: #f03dd4;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+/* Bulk Upload default color */
+.nav-link.bulk {
+  color: #3b66ff;
+  position: relative;
+}
+
+/* Separator style */
+.nav-separator {
+  color: #aaa;
+  opacity: 0.6;
+}
+
+/* Tooltip on hover */
+.nav-link.bulk:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 0;
+  top: -22
+px; /* position above text */
+  background: #ffffff;
+  padding: 2px 6px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 10px;
+  white-space: nowrap;
+  color: #555;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+
+
 /* ----------------------------------------- */
 /* HERO SECTION BASE */
 /* ----------------------------------------- */
@@ -150,7 +193,7 @@ nav {
     color: var(--black);
     line-height: 1.2;
     text-align: center;
-    margin-bottom: 67px;
+    margin-bottom: 57px;
 
     filter:
     drop-shadow(0 0 10px rgba(255, 120, 180, 0.45))
@@ -196,7 +239,6 @@ nav {
 
 .upload-box {
     width: 374px;
-    margin-bottom: 19px;
 }
 
 .upload-area {
@@ -259,6 +301,63 @@ nav {
 .upload-area:hover .upload-image-icon {
     content: url("../images/image_upload-active.png");
 }
+
+
+/* ============================
+   Keyword Input Styling
+   ============================ */
+
+
+/* Keyword box spacing + styling */
+.keyword-box {
+    margin-top: 12px;    /* gap from upload box bottom */
+    margin-bottom: 8px; /* gap before button */
+}
+
+/* Minimal input line style */
+.keyword-input {
+    width: 374px;
+    border: none;
+    border-bottom: 1px solid #b1b2b5d5; /* default underline */
+    padding: 0 2px;
+    font-size: 12px;
+    line-height: 1.7;
+    height: 21px;
+    outline: none;
+    background: transparent;
+    color: #454444;   /* typed text color */
+    font-family: "inter tight", sans-serif;
+    font-style: italic;
+}
+
+/* Placeholder default color */
+.keyword-input::placeholder {
+    color: #b1b2b5d5;
+    opacity: 1;
+}
+
+/* On focus */
+.keyword-input:focus {
+    border-bottom: 1px solid #454444; /* focused underline */
+}
+
+/* Hide placeholder on focus */
+.keyword-input:focus::placeholder {
+    color: transparent; /* makes it disappear */
+}
+
+
+
+/* Error on >2 keyword*/
+
+.keyword-error {
+    font-size: 11px;
+    color: #d9534f; /* soft red */
+    margin-top: 3px;
+    margin-bottom: 0;
+    height: 14px;  /* reserves space so UI doesn't jump */
+}
+
 
 /* ============================
    Image Preview Styling
@@ -972,4 +1071,345 @@ footer {
     .mobile-warning {
         display: block;
     }
+}
+
+
+/* ==========================================================================================
+==========================================================================================
+   BULK PAGE STYLES
+==========================================================================================
+   ========================================================================================== */
+
+
+/* ==============================
+   BULK PAGE — Mini Navigation
+   ============================== */
+
+.bulk-mini-nav {
+    font-family: "Inter Tight", sans-serif;
+    font-size: 10px;
+    margin-bottom: 12px;
+
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    width: 100%;
+    text-align: left;
+}
+
+/* Blue link (Single Image) */
+.bulk-nav-link.bulk-single {
+    color: #3b66ff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.bulk-nav-link.bulk-single:hover {
+    text-decoration: underline;
+}
+
+/* Pink text for active Bulk Upload */
+.bulk-nav-link.bulk-active {
+    color: #f03dd4;
+    font-weight: 500;
+    position: relative;
+    cursor: default;
+}
+
+/* Separator */
+.bulk-nav-separator {
+    color: #aaa;
+    opacity: 0.6;
+}
+
+/* Tooltip for active (Bulk Upload) */
+.bulk-nav-link.bulk-active:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 0;
+    top: -22px;
+
+    background: #ffffff;
+    padding: 2px 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
+    font-size: 10px;
+    white-space: nowrap;
+    color: #555;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+
+/* ==============================
+   BULK — Upload Section
+   ============================== */
+
+/* -----------------------
+   BULK Upload cleaned styles (icons via <img>)
+   ----------------------- */
+
+.bulk-upload-wrapper { max-width: 900px; margin: 0 auto; }
+.bulk-upload-area {
+  width: 837px;
+  height: 238px;
+  margin: 0;
+  border: 2px dashed #dedfe0;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 3px 12px #e7e7e9, inset 0 0 20px rgba(0,0,0,0.03);
+  transition: 0.25s ease;
+  background: linear-gradient(#fff, #fff) padding-box;
+}
+
+/* Hover glow */
+.bulk-upload-area:hover {
+  border: 2px dashed transparent;
+  background: linear-gradient(#fff,#fff) padding-box, linear-gradient(45deg, var(--pink), var(--orange)) border-box;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08), inset 0 0 25px rgba(0,0,0,0.04);
+}
+
+/* Active/inactive control for JS (no !important) */
+.bulk-upload-area.inactive {
+  border: 2px dashed #dedfe0;
+  background: linear-gradient(#fff,#fff) padding-box, linear-gradient(#e5e5e5,#e5e5e5) border-box;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.03);
+  cursor: not-allowed;
+}
+
+.bulk-upload-area.inactive * {
+  pointer-events: none; /* inner contents unclickable */
+}
+
+.bulk-upload-area.active { pointer-events: auto; }
+
+/* Inner container */
+.bulk-upload-inner { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; }
+
+/* Generic state box — hidden/shown by JS */
+.bulk-state-box { width: 100%; height: 100%; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+
+/* Default UI */
+#bulkDefaultUI { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+/* ICONS: Use <img> sizes */
+.bulk-upload-icon
+ {
+  width: 72px; height: auto; margin-bottom: 2px; display: inline-block;
+}
+
+/* Swap to active icon on hover */
+.bulk-upload-area:hover .bulk-upload-icon {
+    content: url("../images/upload_bulk-active.svg");
+}
+
+
+/* Making the states overlap */
+.bulk-state-frame {
+  display: grid;
+  grid-template-rows: 1fr 1fr;  /* top half for icon, bottom half for text */
+  align-items: center;
+  justify-items: center;
+
+  max-height: 80px;       /* fixed height */
+  width: 100%;
+  text-align: center;
+
+  padding: 0;
+}
+
+.bulk-state-frame img {
+  align-self: start;
+}
+
+.bulk-state-frame p {
+  align-self: end;
+}
+
+/* Icons */
+
+.uploading-icon,
+.uploading-done-icon {
+  width: 52px; height: auto; margin-bottom: 12px; display: inline-block;
+}
+
+
+/* progress icon and remark */
+.bulk-progress-icon {
+  width: 48px; height: auto; margin-bottom: 12px; display: inline-block;
+}
+
+/* The status line (“Putting AI…”) */
+.bulk-progress-text { margin: 0; font-size: 14px; color: #8c8e93; }
+
+/* The red error remark while processing */
+.bulk-progress-remark {
+    font-size: 11px;
+    color: #d9534f;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+/* Positioning the processing box to align with uploading/uploaded box */
+#bulkProcessingBox .bulk-state-frame {
+  margin-top: 20px;   /* shift entire processing block down */
+}
+
+#bulkProcessingBox .bulk-progress-icon {
+  transform: translateX(-5px);  /* move left */
+}
+
+
+
+/* Upload text / notes */
+.bulk-upload-text { margin: 0; font-size: 14px; color: #8c8e93; }
+.bulk-upload-note { font-size: 10px; color: #b1b2b5; margin-top: 6px; }
+
+/* Uploading text */
+.uploading-text { margin: 0; font-size: 14px; color: #8c8e93; }
+
+
+/* DONE — ICON */
+.bulk-done-icon {
+  width: 82px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+
+/* Done */ 
+.bulk-done-text { 
+    font-size: 22px;
+    font-weight: bold;
+    
+    background: linear-gradient(45deg, var(--pink) 10%, var(--orange));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    filter:
+    drop-shadow(0 0 14px rgba(255, 120, 165, 0.30));
+
+    margin: -12px 0px 10px 0px;
+}
+
+/* DOWNLOAD LINK */
+
+.bulk-backup-text {
+  font-size: 10px;
+  font-weight: 200;
+  color: #8c8e93;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.bulk-backup-text a.bulk-download-link {
+  color: #3b66ff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#bulkDoneBox, 
+#bulkDoneBox * {
+  pointer-events: auto !important;
+}
+
+/* Error 1 */
+/* Error icon */
+.bulk-error-icon {
+  width: 72px;
+  height: auto;
+  display: block;
+  margin: 0 auto 4px;
+}
+
+/* Error headline */
+.bulk-error-heading {
+  font-size: 14px;
+  color: #8c8e93;
+  margin: -4px auto 0;
+  display: inline-block;
+}
+
+/* Each error bullet */
+.bulk-error-list {
+  padding-left: 0;
+  margin-top: 6px;
+  list-style: disc;
+  text-align: left;
+  font-size: 11px;
+  color: #d9534f;
+}
+
+.bulk-error-list li {
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+
+
+/* Error boxes */
+.bulk-error-box { /* if you use a separate container elsewhere */ }
+
+/* blink animation (used only for processing / uploading icons) */
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.35; }
+  100% { opacity: 1; }
+}
+
+/* Apply blink only to the elements we want */
+.uploading-icon { animation: blink 1.2s infinite; }
+.bulk-progress-icon { animation: blink 1s infinite; }
+
+
+/* ==============================
+BULK — Description Input
+============================== */
+
+.bulk-desc-box {
+margin-top: 12px;
+margin-bottom: 8px;
+}
+
+.bulk-desc-input {
+width: 837px;
+border: none;
+border-bottom: 1px solid #b1b2b5d5;
+background: transparent;
+outline: none;
+
+font-family: "Inter Tight", sans-serif;
+font-size: 12px;
+font-style: italic;
+
+padding: 3px 2px;
+
+color: #454444;
+}
+
+.bulk-desc-input::placeholder {
+color: #b1b2b5d5;
+}
+
+.bulk-desc-input:focus {
+border-bottom: 1px solid #454444;
+}
+
+.bulk-desc-input:focus::placeholder {
+color: transparent;
+}
+
+.bulk-desc-error {
+font-size: 11px;
+color: #d9534f;
+margin-top: 3px;
+height: 14px; /* keeps layout from jumping */
+margin-bottom: 0;
 }
