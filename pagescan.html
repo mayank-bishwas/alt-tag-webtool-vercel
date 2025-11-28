@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>AI Alt Tag Generator</title>
+        <meta name="description" content="An experiment on AI Alt Tag generator">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link 
+            href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css?v=3" />
+        <script src="js/pagescan.js" defer></script> 
+    </head>
+    <body>
+        <header>
+            <nav> 
+            <a href="index.html" class="logo-link" aria-label="Image SEO Checker Home">
+                <img src="images/logo.png" alt="Image SEO Checker">
+            </a>
+            </nav>
+        </header>
+         <!-- End of desktop navigation menu -->
+        
+        <main>
+        
+            <!-- Hero section starts -->
+            <section class="hero-section hero-pagescan">
+                <div class="wrapper">
+                
+                    <h1>Optimize Live Page Image SEO with <span class="colored">AI</span></h1>
+                
+            <!-- Mini-nav for sub-tool navigation -->
+                     <div class="bulk-mini-nav">
+                        <a href="index.html" class="bulk-nav-link bulk-single">Single Image ⤴</a>
+                        <span class="bulk-nav-separator">|</span>
+                        <a href="bulk.html" class="bulk-nav-link bulk-single">Bulk Upload ⤴</a>
+                        <span class="bulk-nav-separator">|</span>
+                        <span class="bulk-nav-link bulk-active" data-tooltip="You're already here">Page Scan</span>
+                    </div>
+
+    
+                <!-- Upload URL Box + Button + Error begins -->
+                 <div class="hero-pagescan">
+                <div class="link-box">
+                    <input type="text" id="urlInput" placeholder="Paste or type webpage url. Upto 10 images on that page will be optimized." />
+                </div>
+
+                 <!-- Button -->
+                <button type="button" id="actionBtnTop" class="generate-btn action-btn">Scan Page for Images</button>
+
+                <div id="scanError" class="page-error"></div>
+                
+                   </div>
+                <!-- Upload URL Box + Button + Error ends -->   
+        
+                </div>
+                </section>
+         
+         <!-- Hero section ends -->
+
+         <!-- ===========================
+     PAGE SCAN RESULTS SECTION
+     =========================== -->
+
+<section id="resultsSection" class="results-section" style="display:none;">
+    <div class="results-wrapper">
+
+        <!-- Header: Page Title + Image Count + Export CSV -->
+            <div id="scanHeaderBar" class="scan-header">
+
+                <!-- Left: Page Title -->
+                <div id="pageTitle" class="scan-page-title">
+                    <!-- Filled by JS -->
+                </div>
+
+                <!-- Right: Image Count & Export Buttons -->
+                <div class="scan-meta">
+
+                    <div class="image-count-box">
+                        <img src="images/uploading-image.svg" class="image-meta-icon">
+                        <span id="imageCount" class="image-count-text">0 / 0<br>images</span>
+                    </div>
+
+                    <button id="exportBtn" class="export-box" disabled>
+                        <img src="images/export-inactive.svg" class="export-meta-icon">
+                        <span>CSV<br>export</span>
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        <!-- Warnings & status messages -->
+        <div id="scanWarnings" class="scan-warnings"></div>
+
+        <!-- Dynamic cards get injected here -->
+        <div id="resultsContainer" class="results-container"></div>
+
+        <!-- Action Buttons (single logical action, visual twin at bottom) -->
+        <div class="results-actions">
+        <button id="actionBtnBottom" class="generate-btn action-btn">Scan Page for Images</button>
+        </div>
+
+
+        <!-- Hidden Template Card (JS Clones This) -->
+<div id="templateCard" class="scan-card" data-index="" style="display:none;">
+
+    <!-- Top Row -->
+    <div class="card-top-row">
+
+        <!-- LEFT COLUMN — IMAGE -->
+        <div class="scan-image-box">
+            <img class="scan-image" src="" alt="">
+            <p class="img-error">
+                Image preview unavailable.
+                <a href="#" class="img-view-link" target="_blank">View here ↗</a>
+            </p>
+        </div>
+
+        <!-- CENTER COLUMN — EXISTING META -->
+        <div class="meta-col existing-col">
+
+            <div class="meta-block alt-block">
+                <div class="meta-label">Existing ALT Text</div>
+                <div class="meta-value existing-alt"></div>
+            </div>
+
+            <div class="meta-block caption-block">
+                <div class="meta-label">Existing Caption</div>
+                <div class="meta-value existing-caption"></div>
+            </div>
+
+            <div class="meta-block filename-block">
+                <div class="meta-label">Existing File Name</div>
+                <div class="meta-value existing-filename"></div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN — AI META -->
+        <div class="meta-col ai-col">
+
+            <div class="meta-block alt-block">
+                <div class="meta-header">
+                    <span class="meta-label">AI-generated ALT Text</span>
+                    <button class="copy-btn ai-copy" data-copy="ai-alt">
+                        <img src="images/copy.svg">
+                    </button>
+                </div>
+                <div class="meta-value ai-alt placeholder">Your AI ALT will appear here.</div>
+            </div>
+
+            <div class="meta-block caption-block">
+                <div class="meta-header">
+                    <span class="meta-label">AI-generated Caption</span>
+                    <button class="copy-btn ai-copy" data-copy="ai-caption">
+                        <img src="images/copy.svg">
+                    </button>
+                </div>
+                <div class="meta-value ai-caption placeholder">Your AI Caption will appear here.</div>
+            </div>
+
+            <div class="meta-block filename-block">
+                <div class="meta-header">
+                    <span class="meta-label">AI-generated File Name</span>
+                    <button class="copy-btn ai-copy" data-copy="ai-filename">
+                        <img src="images/copy.svg">
+                    </button>
+                </div>
+                <div class="meta-value ai-filename placeholder">Your AI Filename will appear here.</div>
+            </div>
+
+        </div>
+
+    </div><!-- end top row -->
+
+    <!-- CONTEXT BOX (full width) -->
+<div class="context-box">
+    <label class="context-label" data-default="AI-generated">
+      Context (optional)
+    </label>
+    
+    <div class="context-input-row">
+        <textarea class="context-input" maxlength="200"></textarea>
+        <span class="context-charcount">0 / 200</span>
+    </div>
+</div>
+
+
+</div>
+
+        <!-- Template ends -->
+    </div>
+
+</section>
+
+
+         <!-- Tutorial Section starts  -->
+        
+            <section class="tutorial-section">
+                <div class="wrapper">
+                <h2>How to Make Your Live Images SEO Friendly?</h2>
+                <div class="tutorial-content">
+                <div class="tutorial-left">
+                    <div class="bullet">
+                        <h3 class="pointer">1. Input</h3>
+                        <p class="description">Paste or type url of the webpage with images (apart from logos and icons) that you want to optimize.</p>
+                    </div>
+
+                    <div class="bullet">
+                        <h3 class="pointer">2. Output</h3>
+                        <p class="description">Receive AI-generated alt text, title, caption, and file name tailored for SEO performance — on-screen and as csv file.</p>
+                    </div>
+
+                    <div class="bullet">
+                        <h3 class="pointer">3. Apply</h3>
+                        <p class="description">Add the outputs into your CMS image settings or HTML img tag attributes for better visibility.</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-right">
+                    <div class="video-container">
+                    <iframe 
+                        src="https://www.youtube.com/embed/UjNe-f4qXjM?si=1CMNk9bdtQilaEo1&controls=1&modestbranding=1&rel=0"
+                        title="Real Moon Crash"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                </div>
+                </div>
+                </div>
+            </section>
+       
+        <!-- Tutorial Section ends  -->
+         
+ 
+        <!-- FAQs Section starts -->
+         
+            <section class="faq-section">
+    <div class="wrapper">
+        <h2>FAQs on SEO Optimization of Live Images</h2>
+
+        <div class="all-faqs">
+            <details class="faq">
+                <summary class="question">What is SEO?</summary>
+                <p class="answer">
+                    Search engine optimization is the process of improving the quality and quantity 
+                    of website traffic to a website or a web page from search engines. SEO targets 
+                    unpaid search traffic rather than direct traffic, referral traffic, 
+                    social media traffic, or paid traffic.
+                </p>
+            </details>
+
+            <details class="faq">
+                <summary class="question">How does alt text help SEO?</summary>
+                <p class="answer">
+                    Alt text helps search engines understand image content. It improves accessibility, 
+                    relevance, and can boost image search rankings.
+                </p>
+            </details>
+
+            <details class="faq">
+                <summary class="question">How do I name image files for SEO?</summary>
+                <p class="answer">
+                    Use descriptive, keyword-rich, lowercase file names separated by hyphens.  
+                    Example: “golden-retriever-dog-running.jpg”.
+                </p>
+            </details>
+        </div>
+    </div>
+</section>
+                 
+        <!-- FAQs Section ends -->
+        </main>
+        <!-- Main Section ends -->    
+
+
+
+        <!-- Footer Section begins -->
+            <footer>
+                <div class="footer-left">
+                    "SEO is baked; not slapped on like icing on a cake."
+                </div>
+
+                <div class="footer-center">
+                    <a href="https://linkedin.com/in/mayankbishwas" target="_blank">
+                    <img src="images/linkedin_white.svg" alt="LinkedIn" class="footer-linkedin">
+                    </a>
+                </div>
+
+                <div class="footer-right">
+                    <a href="about.html">About Us</a>
+                    <a href="mailto:mayankbishwas@gmail.com">Contact Us</a>
+                </div>
+            </footer>
+
+       <!-- Footer Section ends -->
+
+       <!-- Mobile Warning -->
+             <div class="mobile-warning">
+              <div class="mobile-warning-box">
+                 <h2>🖥️ Open on Desktop!</h2>
+                 <p>Sorry, currently our web tool does not support mobile access; it works only on desktop.</p>
+                 <p>But we're working on it, so do keep an eye out 🙂</p>
+                 <p><em>P.S. Might work in landscape mode.</em></p>
+             </div>
+            </div>
+    </body>
+</html>

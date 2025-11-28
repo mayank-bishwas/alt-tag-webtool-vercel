@@ -30,9 +30,19 @@
                 
                     <h1>Optimize Image SEO with <span class="colored">AI</span></h1>
                 
+            <!-- Mini-nav for sub-tool navigation -->
+                     <div class="mini-nav">
+                            <span class="bulk-nav-link bulk-active" data-tooltip="You're already here">Single Image</span>
+                            <span class="nav-separator">|</span>
+                            <a href="bulk.html" class="bulk-nav-link bulk-single">Bulk Upload ⤴</a>
+                            <span class="bulk-nav-separator">|</span>
+                            <a href="pagescan.html" class="bulk-nav-link bulk-single">Page Scan ⤴</a>
+                    </div>
+
                 <!-- Hero left begins -->
                  <div class="hero-content">
                 <div class="hero-left">
+
                 <!-- Upload Box -->
                 <div class="upload-box">
     <input type="file" id="imageInput" accept="image/*" hidden />
@@ -46,6 +56,18 @@
         <p><span class="upload-link">Click to upload or drag & drop</p>
         <span class="upload-note">PNG, JPG/JPEG, GIF, WebP</span>
     </label>
+</div>
+
+<!-- Keyword Input -->
+<div class="keyword-box">
+    <input 
+        type="text" 
+        id="keywordInput" 
+        placeholder="Keyword (optional, max 2, comma-separated)" 
+        class="keyword-input"
+        aria-label="Optional keywords"
+    />
+    <div id="keywordError" class="keyword-error"></div>
 </div>
 
 

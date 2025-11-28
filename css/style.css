@@ -50,27 +50,6 @@ h2 {
 }
 
 
-.affiliate-btn {
-    height: 34px; 
-    width: 170px;
-    color: var(--black);
-
-    font-family: "Inter", sans-serif;
-    font-size: 14px;
-    font-weight: normal;
-    padding: 9px 61px 9px 64px;
-    text-decoration: none;
-
-    border: 1px solid var(--black);
-    border-radius: 20px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    cursor: pointer;
-}
-
 /* Header */
 
 header {
@@ -114,6 +93,69 @@ nav {
 }
 
 
+
+/* Mini-nav for tool navigation */
+/* Top mini navigation */
+
+.mini-nav {
+  font-family: "Inter Tight", sans-serif;
+  font-size: 10px;
+  margin-bottom: 12px; /* space before upload box */
+  padding-left: 4px;   /* the 4px you wanted */
+  
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  
+  width: 100%;   /* ensures it aligns with the upload-box width */
+  justify-content: flex-start;  /* left align */
+  text-align: left;
+}
+
+
+/* Normal link style */
+.nav-link {
+  cursor: default; /* since not clickable yet */
+  transition: 0.15s ease;
+}
+
+/* Single Image color */
+.nav-link.single {
+  color: #f03dd4;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+/* Bulk Upload default color */
+.nav-link.bulk {
+  color: #3b66ff;
+  position: relative;
+}
+
+/* Separator style */
+.nav-separator {
+  color: #aaa;
+  opacity: 0.6;
+}
+
+/* Tooltip on hover */
+.nav-link.bulk:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 0;
+  top: -22px; /* position above text */
+  background: #ffffff;
+  padding: 2px 6px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 10px;
+  white-space: nowrap;
+  color: #555;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+
+
 /* ----------------------------------------- */
 /* HERO SECTION BASE */
 /* ----------------------------------------- */
@@ -150,7 +192,7 @@ nav {
     color: var(--black);
     line-height: 1.2;
     text-align: center;
-    margin-bottom: 67px;
+    margin-bottom: 57px;
 
     filter:
     drop-shadow(0 0 10px rgba(255, 120, 180, 0.45))
@@ -196,7 +238,6 @@ nav {
 
 .upload-box {
     width: 374px;
-    margin-bottom: 19px;
 }
 
 .upload-area {
@@ -259,6 +300,63 @@ nav {
 .upload-area:hover .upload-image-icon {
     content: url("../images/image_upload-active.png");
 }
+
+
+/* ============================
+   Keyword Input Styling
+   ============================ */
+
+
+/* Keyword box spacing + styling */
+.keyword-box {
+    margin-top: 12px;    /* gap from upload box bottom */
+    margin-bottom: 8px; /* gap before button */
+}
+
+/* Minimal input line style */
+.keyword-input {
+    width: 374px;
+    border: none;
+    border-bottom: 1px solid #b1b2b5d5; /* default underline */
+    padding: 0 2px;
+    font-size: 12px;
+    line-height: 1.7;
+    height: 21px;
+    outline: none;
+    background: transparent;
+    color: #454444;   /* typed text color */
+    font-family: "inter tight", sans-serif;
+    font-style: italic;
+}
+
+/* Placeholder default color */
+.keyword-input::placeholder {
+    color: #b1b2b5d5;
+    opacity: 1;
+}
+
+/* On focus */
+.keyword-input:focus {
+    border-bottom: 1px solid #454444; /* focused underline */
+}
+
+/* Hide placeholder on focus */
+.keyword-input:focus::placeholder {
+    color: transparent; /* makes it disappear */
+}
+
+
+
+/* Error on >2 keyword*/
+
+.keyword-error {
+    font-size: 11px;
+    color: #d9534f; /* soft red */
+    margin-top: 3px;
+    margin-bottom: 0;
+    height: 14px;  /* reserves space so UI doesn't jump */
+}
+
 
 /* ============================
    Image Preview Styling
@@ -916,6 +1014,14 @@ footer {
 }
 
 
+/* Disabled / Loading */
+.generate-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 /* ======================================================
    MOBILE WARNING (shown only on mobile)
    ====================================================== */
@@ -973,3 +1079,980 @@ footer {
         display: block;
     }
 }
+
+
+/* ==========================================================================================
+==========================================================================================
+   BULK PAGE STYLES
+==========================================================================================
+   ========================================================================================== */
+
+
+/* ==============================
+   BULK PAGE — Mini Navigation
+   ============================== */
+
+.bulk-mini-nav {
+    font-family: "Inter Tight", sans-serif;
+    font-size: 10px;
+    margin-bottom: 12px;
+
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    width: 100%;
+    text-align: left;
+}
+
+/* Blue link (Single Image) */
+.bulk-nav-link.bulk-single {
+    color: #3b66ff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.bulk-nav-link.bulk-single:hover {
+    text-decoration: underline;
+}
+
+/* Pink text for active Bulk Upload */
+.bulk-nav-link.bulk-active {
+    color: #f03dd4;
+    font-weight: 500;
+    position: relative;
+    cursor: default;
+}
+
+/* Separator */
+.bulk-nav-separator {
+    color: #aaa;
+    opacity: 0.6;
+}
+
+/* Tooltip for active (Bulk Upload) */
+.bulk-nav-link.bulk-active:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 0;
+    top: -22px;
+
+    background: #ffffff;
+    padding: 2px 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
+    font-size: 10px;
+    white-space: nowrap;
+    color: #555;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+
+/* ==============================
+   BULK — Upload Section
+   ============================== */
+
+/* -----------------------
+   BULK Upload cleaned styles (icons via <img>)
+   ----------------------- */
+
+.bulk-upload-wrapper { max-width: 900px; margin: 0 auto; }
+.bulk-upload-area {
+  width: 837px;
+  height: 238px;
+  margin: 0;
+  border: 2px dashed #dedfe0;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 3px 12px #e7e7e9, inset 0 0 20px rgba(0,0,0,0.03);
+  transition: 0.25s ease;
+  background: linear-gradient(#fff, #fff) padding-box;
+}
+
+/* Hover glow */
+.bulk-upload-area:hover {
+  border: 2px dashed transparent;
+  background: linear-gradient(#fff,#fff) padding-box, linear-gradient(45deg, var(--pink), var(--orange)) border-box;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08), inset 0 0 25px rgba(0,0,0,0.04);
+}
+
+/* Active/inactive control for JS (no !important) */
+.bulk-upload-area.inactive {
+  border: 2px dashed #dedfe0;
+  background: linear-gradient(#fff,#fff) padding-box, linear-gradient(#e5e5e5,#e5e5e5) border-box;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.03);
+  cursor: not-allowed;
+}
+
+.bulk-upload-area.inactive * {
+  pointer-events: none; /* inner contents unclickable */
+}
+
+.bulk-upload-area.active { pointer-events: auto; }
+
+/* Inner container */
+.bulk-upload-inner { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; }
+
+/* Generic state box — hidden/shown by JS */
+.bulk-state-box { width: 100%; height: 100%; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+
+/* Default UI */
+#bulkDefaultUI { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+/* ICONS: Use <img> sizes */
+.bulk-upload-icon
+ {
+  width: 72px; height: auto; margin-bottom: 2px; display: inline-block;
+}
+
+/* Swap to active icon on hover */
+.bulk-upload-area:hover .bulk-upload-icon {
+    content: url("../images/upload_bulk-active.svg");
+}
+
+
+/* Making the states overlap */
+.bulk-state-frame {
+  display: grid;
+  grid-template-rows: 1fr 1fr;  /* top half for icon, bottom half for text */
+  align-items: center;
+  justify-items: center;
+
+  max-height: 80px;       /* fixed height */
+  width: 100%;
+  text-align: center;
+
+  padding: 0;
+}
+
+.bulk-state-frame img {
+  align-self: start;
+}
+
+.bulk-state-frame p {
+  align-self: end;
+}
+
+/* Icons */
+
+.uploading-icon,
+.uploading-done-icon {
+  width: 52px; height: auto; margin-bottom: 12px; display: inline-block;
+}
+
+
+/* progress icon and remark */
+.bulk-progress-icon {
+  width: 48px; height: auto; margin-bottom: 12px; display: inline-block;
+}
+
+/* The status line (“Putting AI…”) */
+.bulk-progress-text { margin: 0; font-size: 14px; color: #8c8e93; }
+
+/* The red error remark while processing */
+.bulk-progress-remark {
+    font-size: 11px;
+    color: #d9534f;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+/* Positioning the processing box to align with uploading/uploaded box */
+#bulkProcessingBox .bulk-state-frame {
+  margin-top: 20px;   /* shift entire processing block down */
+}
+
+#bulkProcessingBox .bulk-progress-icon {
+  transform: translateX(-5px);  /* move left */
+}
+
+
+
+/* Upload text / notes */
+.bulk-upload-text { margin: 0; font-size: 14px; color: #8c8e93; }
+.bulk-upload-note { font-size: 10px; color: #b1b2b5; margin-top: 6px; }
+
+/* Uploading text */
+.uploading-text { margin: 0; font-size: 14px; color: #8c8e93; }
+
+
+/* DONE — ICON */
+.bulk-done-icon {
+  width: 82px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+
+/* Done */ 
+.bulk-done-text { 
+    font-size: 22px;
+    font-weight: bold;
+    
+    background: linear-gradient(45deg, var(--pink) 10%, var(--orange));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    filter:
+    drop-shadow(0 0 14px rgba(255, 120, 165, 0.30));
+
+    margin: -12px 0px 10px 0px;
+}
+
+/* DOWNLOAD LINK */
+
+.bulk-backup-text {
+  font-size: 10px;
+  font-weight: 200;
+  color: #8c8e93;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.bulk-backup-text a.bulk-download-link {
+  color: #3b66ff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#bulkDoneBox, 
+#bulkDoneBox * {
+  pointer-events: auto !important;
+}
+
+/* Error 1 */
+/* Error icon */
+.bulk-error-icon {
+  width: 72px;
+  height: auto;
+  display: block;
+  margin: 0 auto 4px;
+}
+
+/* Error headline */
+.bulk-error-heading {
+  font-size: 14px;
+  color: #8c8e93;
+  margin: -4px auto 0;
+  display: inline-block;
+}
+
+/* Each error bullet */
+.bulk-error-list {
+  padding-left: 0;
+  margin-top: 6px;
+  list-style: disc;
+  text-align: left;
+  font-size: 11px;
+  color: #d9534f;
+}
+
+.bulk-error-list li {
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+
+
+/* Error boxes */
+.bulk-error-box { /* if you use a separate container elsewhere */ }
+
+/* blink animation (used only for processing / uploading icons) */
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.35; }
+  100% { opacity: 1; }
+}
+
+/* Apply blink only to the elements we want */
+.uploading-icon { animation: blink 1.2s infinite; }
+.bulk-progress-icon { animation: blink 1s infinite; }
+
+
+/* ==============================
+BULK — Description Input
+============================== */
+
+.bulk-desc-box {
+margin-top: 12px;
+margin-bottom: 8px;
+}
+
+.bulk-desc-input {
+width: 837px;
+border: none;
+border-bottom: 1px solid #b1b2b5d5;
+background: transparent;
+outline: none;
+
+font-family: "Inter Tight", sans-serif;
+font-size: 12px;
+font-style: italic;
+
+padding: 3px 2px;
+
+color: #454444;
+}
+
+.bulk-desc-input::placeholder {
+color: #b1b2b5d5;
+}
+
+.bulk-desc-input:focus {
+border-bottom: 1px solid #454444;
+}
+
+.bulk-desc-input:focus::placeholder {
+color: transparent;
+}
+
+.bulk-desc-error {
+font-size: 11px;
+color: #d9534f;
+margin-top: 3px;
+height: 14px; /* keeps layout from jumping */
+margin-bottom: 0;
+}
+
+
+/* ==========================================================================================
+==========================================================================================
+   PAGE SCAN PAGE STYLES
+==========================================================================================
+   ========================================================================================== */
+
+
+
+   /* ==============================
+Page Scan — Hero Section
+============================== */
+
+/* ===========================================
+   HERO (Page Scan only) — Smaller height
+   =========================================== */
+
+.hero-section.hero-pagescan {
+    min-height: 400px !important;   /* shrink height from 600 → 400 */
+    background-position: center -60px; /* adjust glow slightly */
+    background-size: 750px;
+    margin-bottom: 0;               /* remove any accidental spacing */
+    padding-bottom: 0;
+}
+
+   /* Mini-nav text for in-active Page Scan Feature */
+.bulk-nav-link.bulk-pagescan {
+    color: #3b66ff;
+    font-weight: 500;
+    position: relative;
+    cursor: default;
+}
+
+/* Tooltip for active (Bulk Upload) */
+.bulk-nav-link.bulk-pagescan:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 0;
+    top: -22px;
+
+    background: #ffffff;
+    padding: 2px 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
+    font-size: 10px;
+    white-space: nowrap;
+    color: #555;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Outer box */
+.link-box {
+  width: 837px;
+  height: 52px;
+  margin: 0 auto;
+  border: 2px dashed #dedfe0;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 3px 12px #e7e7e9, inset 0 0 20px rgba(0,0,0,0.03);
+  transition: 0.25s ease;
+  padding: 16px;
+
+}
+
+/* Hover glow */
+.link-box:hover {
+  border: 2px dashed transparent;
+  background: linear-gradient(#fff,#fff) padding-box,
+              linear-gradient(45deg, var(--pink), var(--orange)) border-box;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08),
+              inset 0 0 25px rgba(0,0,0,0.04);
+}
+
+/* Input */
+#urlInput {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-family: "Inter Tight", sans-serif;
+  font-size: 14px;
+  color: #454444;
+  background: transparent;
+}
+
+/* Placeholder */
+#urlInput::placeholder {
+  color: #b1b2b5;
+  font-style: italic;
+}
+
+/* Disabled state */
+.link-box.inactive {
+  border: 2px dashed #dedfe0; 
+  background: linear-gradient(#fff,#fff) padding-box, linear-gradient(#e5e5e5,#e5e5e5) border-box; 
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.03); 
+  cursor: not-allowed;
+}
+
+.link-box.inactive * {
+  pointer-events: none; /* inner contents unclickable */
+}
+
+.link-box.active {
+  pointer-events: auto; 
+}
+
+
+/* ================================= */
+/* Scan Button */
+.action-btn {
+  appearance: none;
+  border: none;
+
+  padding: 7px auto;
+  margin: 22px auto 22px;
+
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+  background: #1a1a1a;
+  border: 2px solid transparent;
+
+  background: 
+        linear-gradient(#111, #111) padding-box, 
+        linear-gradient(180deg, var(--pink), var(--orange)) border-box;
+  border: 2px solid transparent;
+  border-radius: 40px;
+
+  cursor: pointer;
+  transition: 0.25s ease;
+    
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hover */
+.action-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.22);
+}
+
+/* Press Down */
+.action-btn:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.18);
+}
+
+/* Disabled / Loading */
+.action-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Scan Error */
+#scanError {
+  color: #d9534f;
+  margin-top: 12px;
+  font-size: 11px;
+  text-align: center;
+}
+
+
+ /* ==============================
+Page Scan — Preview Section
+============================== */
+
+/* Preview Section background */
+  
+/* Outer section stays clean */
+.results-section {
+  position: relative;
+  padding-top: 20px;
+}
+
+
+/* The WRAPPER gets the glow, not the SECTION */
+.results-wrapper {
+  position: relative;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  z-index: 1;
+  overflow: hidden;        /* <-- the key so glow stays INSIDE */
+}
+
+
+/* Move the gradient HERE */
+.results-wrapper {
+  position: relative;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  z-index: 1;
+  overflow: visible;   /* allow the glow to spill OUT softly */
+}
+
+.results-wrapper::before {
+  content: "";
+  position: absolute;
+  top: -35%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 160%;
+  height: 190%;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 179, 206, 0.28) 0%,     /* center (slightly softer than before) */
+    rgba(255, 185, 216, 0.16) 28%,    /* fade begins earlier */
+    rgba(255, 210, 230, 0.08) 52%,    /* much lighter mids */
+    rgba(255, 235, 245, 0.03) 75%,    /* extremely faint edges */
+    rgba(255, 255, 255, 0) 100%       /* fully invisible outer extremes */
+  );
+
+  filter: blur(70px);    /* bigger blur = softer extremes */
+  opacity: 0.9;
+  z-index: -1;
+  pointer-events: none;
+}
+
+
+
+
+
+/* Entire results area */
+.results-section {
+  width: 100%;
+  background: #fefefe; /* soft cream */
+  padding: 40px;
+  display: none; /* shown by JS */
+}
+
+/* inner wrapper containing header + cards */
+.results-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #fefefe;
+  padding: 40px;
+}
+
+
+/* Header bar containing title + image count + export */
+.scan-header {
+  max-width: 1120px;
+  height: 120px;
+  background: #fbfbfb; 
+  border-radius: 6px;
+  padding: 40px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 20px;
+  border: 1px solid #dedfe0;  
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05); 
+}
+
+/* Page Title fetched by the backend */
+.scan-page-title {
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #454444;
+  line-height: 1.2;
+  max-width: 732px;
+  margin: 0px;
+}
+
+/* Page meta */
+
+.scan-meta {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Page meta - Image Counter */
+
+
+.image-count-box {
+  width: 124px;      /* ← instead of max-width */
+  min-width: 124px;  /* ← prevents flex shrinking */
+  height: 56px;
+  flex-shrink: 0;     /* ← hard stop: never shrink inside flex */
+
+  display: flex;
+  align-items: center; /* CENTER vertically */ 
+  justify-content: center; /* CENTER horizontally */
+  gap: 2px;
+
+  background: #fefefe; 
+  border-radius: 6px;
+
+  padding: 0 !important;
+
+  font-size: 14px;
+  font-weight: 400;
+  color: #454444;
+  font-family: "Inter", sans-serif;
+  text-align: left;
+  line-height: 1.2;
+
+  border: 1px solid #dedfe0;  
+  cursor: default;
+}
+
+.image-count-box .image-meta-icon {
+  width: 37px;
+  height: auto;
+
+  margin-bottom: 6px;
+}
+
+.image-count-text {
+  display: inline-block;
+  text-align: left;
+  white-space: nowrap; /* prevents weird wrapping on "7 / 16" */
+  line-height: 1.1;
+}
+
+.image-count-text br {
+  line-height: 0; /* reduces spacing between the two lines */
+}
+
+
+
+/* Page meta - Export Button */
+.export-box {
+  width: 124px;      /* ← instead of max-width */
+  min-width: 124px;  /* ← prevents flex shrinking */
+  height: 56px;
+  flex-shrink: 0;     /* ← hard stop: never shrink inside flex */
+    
+  display: flex; 
+  align-items: center; /* CENTER vertically */ 
+  justify-content: center; /* CENTER horizontally */ 
+  gap: 6px;
+
+  background: #fefefe;
+  border-radius: 6px;
+
+  border: 1px solid #dedfe0;  
+  cursor: pointer;
+
+  font-size: 14px;
+  font-weight: 400;
+  color: #454444;
+  font-family: "Inter", sans-serif;
+  text-align: left;
+  line-height: 1.2;
+
+  transition: 0.2s ease;
+}
+
+.export-box .export-meta-icon {
+  width: 30px;
+  height: auto;
+}
+
+
+.export-box:disabled {
+  cursor: not-allowed;
+}
+
+.export-box:hover:not(:disabled) {
+  transform: translateY(-1.5px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+
+.export-box:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+
+/* export tool tip in inactive state */
+/* Export tooltip: only when disabled AND hovered */
+.export-box:disabled:hover::after {
+  content: "Generate ALT Text to activate";
+  position: absolute;
+  
+  top: -22px; /* position above text */
+  background: #fffcc7;
+  padding: 2px 6px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 10px;
+  white-space: nowrap;
+  color: #555;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.05);
+
+  z-index: 20;
+  pointer-events: none; /* tooltip does not block hover */
+}
+
+/* Required: allow absolute-positioned tooltip inside the box */
+.export-box {
+  position: relative;
+}
+
+
+/* Scan warnings or erros. hidden temporarily */
+
+
+
+
+/* ==========================================================
+   SCAN CARD (Outer Container)
+   ========================================================== */
+.scan-card {
+  width: 100%;
+  max-height: 315px;
+  background: #fbfbfb;  
+  border: 1px solid #dedfe0;
+  border-radius: 6px;
+  padding: 12px 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05); 
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+
+
+/* ==========================================================
+   TOP ROW = IMAGE COLUMN + EXISTING META + AI META
+   Uses flex instead of grid for better control
+   ========================================================== */
+.card-top-row {
+  display: grid;
+  grid-template-columns: 336px 1fr 1fr;
+  gap: 8px;
+}
+
+
+/* META COLUMNS */
+.meta-col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  width: 374px;         /* ← makes every block inside fixed-width */
+  min-width: 374px;     /* ← prevents flex/grid from shrinking */
+  max-width: 374px;     /* ← prevents growing */
+}
+
+
+/* ==========================================================
+   IMAGE PREVIEW (left 1 column)
+   ========================================================== */
+.scan-image-box {
+  max-width: 336px;
+  height: 230px;
+
+  background: #ffffff;  
+  border-radius: 2px;
+  border: 1px solid #dedfe0;  
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  padding: 5px;
+}
+
+.scan-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.img-error {
+  font-family: "inter tight", sans-serif;
+  font-size: 10px;
+  color: #ee461a;
+  padding: 8px;
+  text-align: center;
+}
+
+
+
+/* ==========================================================
+   DETAILS GRID (Existing + AI columns)
+   This entire block covers BOTH meta columns
+   ========================================================== */
+.scan-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ==========================================================
+   INDIVIDUAL BLOCKS FIXED HEIGHTS
+========================================================== */
+.meta-block {
+  background: #fff;
+  border: 1px solid #dedfe0;
+  border-radius: 2px;
+  padding: 6px 16px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  overflow: hidden;
+}
+
+.alt-block { height: 108px; }
+.caption-block { height: 53px; }
+.filename-block { height: 53px; }
+
+
+
+
+/* ==========================================================
+   LABEL + VALUE STYLING
+   ========================================================== */
+.meta-label {
+    font-family: "Inter Tight", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #454444;
+
+    margin-bottom: 2px; 
+    }
+
+
+
+.meta-value{
+  font-size: 12px;
+  color: #454444;
+  margin: 0;
+
+  line-height: 1.35;
+
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  text-overflow: unset;
+}
+
+/* Placeholder grey */
+.placeholder {
+  color: #b1b2b5 !important;
+  font-style: italic;
+}
+
+/* copy buttons */
+.meta-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+/* ==========================================================
+   CONTEXT BOX (full width below top row)
+   ========================================================== */
+.context-box {
+  background: #ffffff; 
+  border-radius: 2px;
+  padding: 6px 16px;
+  border: 1px solid #dedfe0;
+  height: 53px;
+  
+  margin-bottom: 12px;
+  margin-top: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+}
+
+.context-label {
+    font-family: "Inter Tight", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #454444;
+    display: block;
+}
+
+
+
+.context-input-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+
+.context-input {
+  flex: 1;
+  height: 20px;  
+  padding: 0;
+  border: none;
+  outline: none;
+  resize: none;
+
+  font-family: "Inter Tight", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #454444;
+
+  overflow: hidden !important;   /* hides scrollbar */
+  resize: none !important;       /* user can't resize */
+}
+
+.context-charcount {
+  font-size: 8px;
+  color: #b1b2b5;
+  margin: 0px;
+  text-align: right;
+
+  min-width: 30px;
+}
+
+
+/* Button 2 - Result Area Button */
+.results-actions {
+    margin-top: 40px;   /* push the button downward */
+}
+
