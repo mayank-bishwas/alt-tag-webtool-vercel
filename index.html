@@ -3,14 +3,15 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>AI Alt Tag Generator</title>
-        <meta name="description" content="An experiment on AI Alt Tag generator">
+        <title>Image SEO Tool for Alt text, Caption, File name | Free, No Signup</title>
+        <meta name="description" content="Upload a single image and keyword (optional) to generate SEO-friendly Alt text, Caption, and file name. Plus, Bulk Upload and Page Scan features.">
+        <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link 
             href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="css/style.css" />
-        <script src="js/app.js" defer></script>
+        <link rel="stylesheet" href="css/style.css?v=12042025" />
+        <script src="js/app.js?v=12042025" defer></script>
     </head>
     <body>
         <header>
@@ -30,9 +31,19 @@
                 
                     <h1>Optimize Image SEO with <span class="colored">AI</span></h1>
                 
+            <!-- Mini-nav for sub-tool navigation -->
+                     <div class="mini-nav">
+                            <span class="bulk-nav-link bulk-active" data-tooltip="You're already here">Single Image</span>
+                            <span class="nav-separator">|</span>
+                            <a href="bulk.html" class="bulk-nav-link bulk-single">Bulk Upload ⤴</a>
+                            <span class="bulk-nav-separator">|</span>
+                            <a href="pagescan.html" class="bulk-nav-link bulk-single">Page Scan ⤴</a>
+                    </div>
+
                 <!-- Hero left begins -->
                  <div class="hero-content">
                 <div class="hero-left">
+
                 <!-- Upload Box -->
                 <div class="upload-box">
     <input type="file" id="imageInput" accept="image/*" hidden />
@@ -46,6 +57,18 @@
         <p><span class="upload-link">Click to upload or drag & drop</p>
         <span class="upload-note">PNG, JPG/JPEG, GIF, WebP</span>
     </label>
+</div>
+
+<!-- Keyword Input -->
+<div class="keyword-box">
+    <input 
+        type="text" 
+        id="keywordInput" 
+        placeholder="Keyword (optional, max 2, comma-separated)" 
+        class="keyword-input"
+        aria-label="Optional keywords"
+    />
+    <div id="keywordError" class="keyword-error"></div>
 </div>
 
 
@@ -117,25 +140,25 @@
                 <div class="tutorial-left">
                     <div class="bullet">
                         <h3 class="pointer">1. Input</h3>
-                        <p class="description">Select and upload your image. You can optionally add a keyword for better optimization.</p>
+                        <p class="description">Upload a single image. Include a keyword for better optimization. Hit 'Generate ALT Text'.</p>
                     </div>
 
                     <div class="bullet">
                         <h3 class="pointer">2. Output</h3>
-                        <p class="description">Receive AI-generated alt text, title, caption, and file name tailored for SEO performance.</p>
+                        <p class="description">Get SEO-friendly Alt text, Caption, and File name that's SEO-friendly that organically uses your keyword(s).</p>
                     </div>
 
                     <div class="bullet">
                         <h3 class="pointer">3. Apply</h3>
-                        <p class="description">Add the outputs into your CMS image settings or HTML img tag attributes for better visibility.</p>
+                        <p class="description">Add the outputs in your CMS or HTML image tag attributes for search engines (Google, Bing etc.) or LLMs to read.</p>
                     </div>
                 </div>
 
                 <div class="tutorial-right">
                     <div class="video-container">
                     <iframe 
-                        src="https://www.youtube.com/embed/bfThiqDd9FA?si=1CMNk9bdtQilaEo1&controls=1&modestbranding=1&rel=0"
-                        title="Real Moon Crash"
+                        src="https://www.youtube.com/embed/TOiGCbRpvmM?&controls=1&modestbranding=1&rel=0"
+                        title="Image Alt AI Tool Tutorial"
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                         allowfullscreen>
@@ -157,28 +180,85 @@
 
         <div class="all-faqs">
             <details class="faq">
-                <summary class="question">What is SEO?</summary>
+                <summary class="question">What is image SEO?</summary>
                 <p class="answer">
-                    Search engine optimization is the process of improving the quality and quantity 
-                    of website traffic to a website or a web page from search engines. SEO targets 
-                    unpaid search traffic rather than direct traffic, referral traffic, 
-                    social media traffic, or paid traffic.
+                    It’s the practice of helping search engines (and also LLMs and Answer Engines) understand your images through alt text, captions, file names, and context. Further, image SEO best practices help make your website more user-friendly in accordance with the World Wide Web Consortium (W3C) (and possibly your local government's) guidelines of web accessibility.</p>
+            </details>
+
+            <details class="faq">
+                <summary class="question">Is single image SEO optimization possible with AI?</summary>
+                <p class="answer">
+                    Yes. AI can understand the image content and generate clean, search-friendly metadata instantly.
                 </p>
             </details>
 
             <details class="faq">
-                <summary class="question">How does alt text help SEO?</summary>
+                <summary class="question">How does the AI tool for optimizing images work?</summary>
                 <p class="answer">
-                    Alt text helps search engines understand image content. It improves accessibility, 
-                    relevance, and can boost image search rankings.
+                    You upload an image → Input keyword (optional, up to 2) → Hit 'Generate Alt Text' → the AI analyses it → you get alt text, caption, and file name that follow SEO best practices. <br> <br>Everything takes a few seconds!
                 </p>
             </details>
 
             <details class="faq">
-                <summary class="question">How do I name image files for SEO?</summary>
+                <summary class="question">Does the Image SEO optimization result work for ChatGPT and other LLMs as well? </summary>
                 <p class="answer">
-                    Use descriptive, keyword-rich, lowercase file names separated by hyphens.  
-                    Example: “golden-retriever-dog-running.jpg”.
+                    Yes. Good alt text improves how both search engines (like Google, Bing etc.) and LLMs (like ChatGPT, Gemini, Claude, etc.) interpret your image content.
+                </p>
+            </details>
+
+            <details class="faq">
+                <summary class="question">How accurate is the AI for images optimization?</summary>
+                <p class="answer">
+                    For clear images, very accurate. And you can always tweak the outputs if your page has special context.
+                </p>
+            </details>
+
+            <details class="faq">
+                <summary class="question">Why should one use the AI webtool to make images SEO-friendly?</summary>
+                <p class="answer">
+                    To save time. Plus, writing a SEO-friendly is an art and science that takes a little time to master. And even with that knowledge, you're always looking for an efficient way to do things. That's where our AI Alt Text generator tool comes in handy.
+                </p>
+            </details>
+
+            <details class="faq">
+                <summary class="question">For whom is this image SEO AI best?</summary>
+                <p class="answer">
+                    Bloggers, marketers, product managers, and anyone who needs quick SEO-ready image metadata. No prior experience in SEO or GEO/AEO is needed to use this AI image tool. 
+                </p>
+            </details>
+
+            <details class="faq">
+                <summary class="question">Which is the best image SEO tool powered by AI?</summary>
+                <p class="answer">
+                    There are a handful of such tools that typically go by the name of AI Image Alt Text Generator online. While most do the same thing and 'the best' is subjective, we believe the image SEO tool by ImageAltAI.com is better. Because unlike most others that only give alt text, ours generate caption + file name as well; that, too, in the least click and scrolls. 
+                </p>
+            </details>
+
+            <details class="faq">
+                <summary class="question">Is there an alternative to this Image SEO AI Tool?</summary>
+                <p class="answer">
+                    There are a handful of alt-text generators — but most stop at only alt text. Ours gives all three image metadata (alt text + caption + file name) crucial for overall image seo optimization. 
+                </p>
+            </details>
+
+            <details class="faq">
+                <summary class="question">Is the AI software for image seo free?</summary>
+                <p class="answer">
+                    Yes. It's Free. Needs No signup. Just upload and go. As many times as you want. 
+                </p>
+            </details>
+
+            <details class="faq">
+                <summary class="question">What other features are coming up in this website for image SEO?</summary>
+                <p class="answer">
+                    Beyond faster and more accurate results, we’re working on adding language selection for output. So do keep an eye out!
+                </p>
+            </details>
+
+            <details class="faq">
+                <summary class="question">Where to contact for a feature request or collab suggestion on AI Alt Text Generator or another SEO tool?</summary>
+                <p class="answer">
+                    First off, glad that you'd be interested in getting touch. Any feedback is also highly appreciated. You can either <a href="mailto:mayankbishwas@gmail.com">email</a> or connect/message me on <a href="https://www.linkedin.com/in/mayankbishwas">LinkedIn</a>.
                 </p>
             </details>
         </div>
@@ -193,8 +273,10 @@
 
         <!-- Footer Section begins -->
             <footer>
-                <div class="footer-left">
-                    "SEO is baked; not slapped on like icing on a cake."
+                <div class="footer-left footer-nav">
+                    <a href="index.html">Single Image</a>
+                    <a href="bulk.html">Bulk Upload</a>
+                    <a href="pagescan.html">Page Scan</a>
                 </div>
 
                 <div class="footer-center">
@@ -204,8 +286,8 @@
                 </div>
 
                 <div class="footer-right">
-                    <a href="about.html">About Us</a>
-                    <a href="mailto:mayankbishwas@gmail.com">Contact Us</a>
+                    <a href="about.html">About</a>
+                    <a href="mailto:mayankbishwas@gmail.com">Contact</a>
                 </div>
             </footer>
 
