@@ -1147,7 +1147,7 @@ footer {
 /* ======================================================
    SHOW ONLY WARNING ON MOBILE
    ====================================================== */
-
+/* For all pages except 404 page */
 @media (max-width: 768px) {
     main,
     header,
@@ -1159,6 +1159,21 @@ footer {
         display: block;
     }
 }
+
+/* Only for the 404 page */
+
+@media (max-width: 768px) {
+    .hero-section-404,
+    header,
+    footer {
+        display: none;
+    }
+
+    .mobile-warning {
+        display: block;
+    }
+}
+
 
 
 /* ==========================================================================================
