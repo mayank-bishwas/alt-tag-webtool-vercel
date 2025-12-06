@@ -1,0 +1,9 @@
+User-agent: Googlebot
+Disallow: /api/ # Rule 1: Googlebot still can't access /api/
+Disallow: /staging/ # Rule 2: Googlebot also can't access /staging/
+
+User-agent: *
+Allow: /
+Disallow: /api/ # All other bots can't access /api/ (as before)
+
+Sitemap: https://imagealtai.com/sitemap.xml

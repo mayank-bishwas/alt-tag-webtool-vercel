@@ -1,0 +1,28 @@
+{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    }
+  ],
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/bulk-image-alt-generator", "destination": "/bulk-image-alt-generator.html" },
+    { "source": "/live-image-alt-generator", "destination": "/live-image-alt-generator.html" },
+    { "source": "/about-best-image-alt-generator", "destination": "/about-best-image-alt-generator.html" }
+  ],
+  "redirects": [
+    { "source": "/bulk.html", "destination": "/bulk-image-alt-generator", "permanent": true },
+    { "source": "/pagescan.html", "destination": "/live-image-alt-generator", "permanent": true },
+    { "source": "/about.html", "destination": "/about-best-image-alt-generator", "permanent": true }
+  ],
+  "routes": [
+    {
+      "src": "/.*",
+      "status": 404,
+      "dest": "/404.html"
+    }
+  ]
+}

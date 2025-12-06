@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const copyAlt = document.getElementById("copyAlt");
   const copyCap = document.getElementById("copyCaption");
   const copyFile = document.getElementById("copyFilename");
+  const keywordInput = document.getElementById("keywordInput");
+  const keywordError = document.getElementById("keywordError");
+
 
   let currentDataUrl = null;
 
@@ -88,13 +91,61 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Wire up buttons
-  if (generateBtn) generateBtn.addEventListener("click", () => callGenerate());
+  // Allow Enter key to trigger Generate after image is uploaded
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    if (currentDataUrl) {
+      e.preventDefault(); // stop accidental form submissions
+      const raw = keywordInput?.value || "";
+      callGenerate(raw);
+    }
+  }
+});
+
+  // Wire up buttons and keywords
+  if (generateBtn) generateBtn.addEventListener("click", () => {
+    const raw = keywordInput?.value || "";
+
+    // --- NEW KEYWORD VALIDATION ---
+    if (raw.trim()) {
+      const parts = raw
+        .split(",")
+        .map(k => k.trim())
+        .filter(k => k.length > 0);
+
+      if (parts.length > 2) {
+        alert("Only 2. Triple loading not allowed 🛵");
+        return;
+      }
+    }
+    // ------------------------------
+
+    callGenerate(raw);
+});
+
+
   if (tryBtn) tryBtn.addEventListener("click", () => {
     // If tryBtn exists on About page, redirect to homepage or open upload
     const uploadAnchor = document.querySelector(".upload-area");
     if (uploadAnchor) window.location.href = "/";
   });
+
+  // Live keyword validation while typing
+keywordInput.addEventListener("input", () => {
+  const raw = keywordInput.value;
+
+  const parts = raw
+    .split(",")
+    .map(k => k.trim())
+    .filter(k => k.length > 0);
+
+  if (parts.length > 2) {
+    keywordError.textContent = "Only 2. Triple loading not allowed 🛵";
+  } else {
+    keywordError.textContent = "";
+  }
+});
+
 
   // Copy buttons
   function wireCopy(button, targetEl) {
